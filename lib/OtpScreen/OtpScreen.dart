@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:untitled1/Signup/Signup.dart';
+import 'package:untitled1/Register/Signup.dart';
 
 class NumericPad extends StatelessWidget {
   final Function(int) onNumberSelected;

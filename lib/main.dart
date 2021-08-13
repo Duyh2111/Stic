@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'Signup/Signup.dart';
+import 'Register/Signup.dart';
 
 void main() {
   runApp(MyApp());
