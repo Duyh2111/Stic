@@ -114,7 +114,7 @@ class _Signup extends State<Signup> {
                   child: CheckboxListTile(
                     controlAffinity: ListTileControlAffinity.leading,
                     title: Text(
-                      'Tôi xác nhận tất cả thông tin trên là đúng',
+                      'Tôi xác nhận tất cả thông tin trên là đúng.',
                       style: TextStyle(
                         color: Color(0XFF625F6E),
                       ),
