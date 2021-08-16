@@ -1,7 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 import 'package:untitled1/ForgotPassword/ForrgotPassword.dart';
 
 class MyHomePage extends StatelessWidget {
+  GlobalKey<FormState> formkey = GlobalKey<FormState>();
+  String? validatePassword(String value) {
+    if (value.isEmpty) {
+      return "* Required";
+    } else if (value.length < 6) {
+      return "Password should be atleast 6 characters";
+    } else if (value.length > 15) {
+      return "Password should not be greater than 15 characters";
+    } else
+      return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -10,178 +23,198 @@ class MyHomePage extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-              image: Image.asset("assets/images/Background.jpg").image,
+              image: Image.asset("assets/images/Bgr.png").image,
               fit: BoxFit.fill),
         ),
-        child: Center(
-          child: Center(
-            child: Column(
-              children: [
-                AppBar(
-                  leading: IconButton(
-                    icon: Icon(Icons.arrow_back, color: Colors.black),
-                    onPressed: () => Navigator.of(context).pop(),
-                  ),
-                  backgroundColor: Colors.transparent,
-                  elevation: 0.0,
-                  title: Text(
-                    "Đăng nhập",
-                    style: TextStyle(
-                      color: Color(0xFF0f45e7),
-                      fontSize: 18,
+        child: Column(
+          children: [
+            // AppBar(
+            //   leading: IconButton(
+            //     icon: Icon(Icons.arrow_back, color: Colors.black),
+            //     onPressed: () => Navigator.of(context).pop(),
+            //   ),
+            //   backgroundColor: Colors.transparent,
+            //   elevation: 0.0,
+            //   title: Text(
+            //     "Đăng nhập",
+            //     style: TextStyle(
+            //       color: Color(0xFF0f45e7),
+            //       fontSize: 18,
+            //     ),
+            //   ),
+            // ),
+            Container(
+              margin: EdgeInsets.only(top: 170),
+              child: Text(
+                "Đăng nhập",
+                style: TextStyle(
+                  color: Color(0xFF0f45e7),
+                  fontSize: 18,
+                ),
+              ),
+            ),
+            SizedBox(height: 40),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 15),
+              child: Form(
+                key: formkey,
+                child: Column(
+                  children: [
+                    Container(
+                      width: 350,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Color(0xffF6F6F6)),
+                      child: TextFormField(
+                          decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(color: Color(0xffE8E8E8), width: 1.0),
+
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              border: const OutlineInputBorder(),
+                              labelText: 'Email',
+                              hintText:
+                                  'Enter valid email id as abc@gmail.com'),
+                          validator: MultiValidator([
+                            RequiredValidator(errorText: "* Required"),
+                            EmailValidator(errorText: "Enter valid email id"),
+                          ])),
                     ),
-                  ),
-                ),
-                Container(
-                  width: 350,
-                  margin: const EdgeInsets.only(top: 130.0, bottom: 15),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Color(0xffF6F6F6)),
-                  child: TextField(
-                    decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Color(0xffe8e8e8), width: 1.0),
-                        ),
-                        hintText: "Email",
-                        hintStyle: TextStyle(color: Colors.grey, fontSize: 16)),
-                  ),
-                ),
-                Container(
-                  width: 350,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Color(0xffF6F6F6)),
-                  child: TextFormField(
-                    obscureText: true,
-                    decoration: const InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Color(0xffe8e8e8), width: 1.0),
-                        ),
-                        hintText: "Password",
-                        hintStyle: TextStyle(color: Colors.grey, fontSize: 16)),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ForgotPassword()));
-                  },
-                  child: Container(
-                    margin: const EdgeInsets.only(top: 20, left: 220),
-                    child: Text(
-                      "Quên mật khẩu?",
-                      style: TextStyle(
-                          fontSize: 16,
-                          color: Color(0xff625F6E),
-                          decoration: TextDecoration.underline),
+                    SizedBox(height: 15),
+                    Container(
+                      width: 350,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Color(0xffF6F6F6)),
+                      child: TextFormField(
+                          obscureText: true,
+                          decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(color: Color(0xffE8E8E8), width: 1.0),
+
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              border: const OutlineInputBorder(),
+                              labelText: 'Password',
+                              hintText: 'Enter secure password'),
+                          validator: MultiValidator([
+                            RequiredValidator(errorText: "* Required"),
+                            MinLengthValidator(6,
+                                errorText:
+                                    "Password should be atleast 6 characters"),
+                            MaxLengthValidator(15,
+                                errorText:
+                                    "Password should not be greater than 15 characters")
+                          ])
+                          //validatePassword,        //Function to check validation
+                          ),
                     ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    // Navigator.push(
-                    //   context, MaterialPageRoute(builder: (
-                    //     context) => HomeScreen()));
-                  },
-                  child: Container(
-                    width: 223,
-                    height: 52,
-                    margin: const EdgeInsets.only(top: 50, bottom: 35),
-                    padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                    Container(
+                      margin: EdgeInsets.only(left: 188),
+                      child: FlatButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ForgotPassword()));
+                        },
+                        child: Text(
+                          'Quên mật khẩu?',
+                          style: TextStyle(color: Color(0xff625F6E), fontSize: 16),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 48),
+                    Container(
+                      height: 52,
+                      width: 223,
+                      padding: EdgeInsets.symmetric(horizontal: 32, vertical: 14),
                     decoration: BoxDecoration(
+                      border: Border.all(
+                          width: 2.0, color: const Color(0xFF5479e7)),
                       borderRadius: BorderRadius.circular(50),
                       color: Color(0xff6B8AE7),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          // spreadRadius: 4,
-                          blurRadius: 4,
-                          offset: Offset(2, 2), // changes position of shadow
+                    ),
+                      child: FlatButton(
+                        onPressed: () {
+                          if (formkey.currentState!.validate()) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Processing Data')),
+                            );
+                            // Navigator.push(context,
+                            //     MaterialPageRoute(builder: (_) => HomePage()));
+                          } else {
+                            print("Not Validated");
+                          }
+                        },
+                        child: Text(
+                          'Đăng nhập',
+                          style: TextStyle(color: Colors.white, fontSize: 16),
                         ),
-                      ],
-                    ),
-                    child: Center(
-                      child: Text(
-                        "Đăng nhập",
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.white,
-                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
-                Row(children: <Widget>[
-                  Expanded(
-                    child: new Container(
-                        margin: const EdgeInsets.only(left: 15.0, right: 10.0),
-                        child: Divider(color: Color(0XFF625F6E))),
-                  ),
-                  Text(
-                    "Hoặc",
-                    style: TextStyle(
-                      color: Color(0XFF625F6E),
-                      fontSize: 16,
-                    ),
-                  ),
-                  Expanded(
-                    child: new Container(
-                        margin: const EdgeInsets.only(left: 15.0, right: 10.0),
-                        child: Divider(color: Color(0XFF625F6E))),
-                  ),
-                ]),
-                Container(
-                  width: 339,
-                  height: 52,
-                  margin: const EdgeInsets.only(top: 35, bottom: 70),
-                  padding: EdgeInsets.symmetric(horizontal: 58, vertical: 15),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Color(0xfff6f6f6),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey,
-                        // spreadRadius: 4,
-                        blurRadius: 4,
-                        offset: Offset(2, 2), // changes position of shadow
-                      ),
-                    ],
-                  ),
-                  child: Center(
-                    child: Text(
-                      "Đăng nhập với Google",
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Color(0XFF625F6E),
-                      ),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    // Navigator.push(
-                    //   context, MaterialPageRoute(
-                    //     builder: (context) => Forgotpassword()));
-                  },
-                  child: Container(
-                    // margin: const EdgeInsets.only(top: 20, left: 220),
-                    child: Text(
-                      "Đăng ký tài khoản mới",
-                      style: TextStyle(
-                          fontSize: 16,
-                          color: Color(0xffdfe1e7),
-                          decoration: TextDecoration.underline),
-                    ),
-                  ),
-                )
-              ],
+              ),
             ),
-          ),
+            SizedBox(height: 24),
+            Row(children: <Widget>[
+              Expanded(
+                child: new Container(
+                    margin: const EdgeInsets.only(left: 15.0, right: 10.0),
+                    child: Divider(color: Color(0XFF625F6E))),
+              ),
+              Text(
+                "Hoặc",
+                style: TextStyle(
+                  color: Color(0XFF625F6E),
+                  fontSize: 16,
+                ),
+              ),
+              Expanded(
+                child: new Container(
+                    margin: const EdgeInsets.only(left: 15.0, right: 10.0),
+                    child: Divider(color: Color(0XFF625F6E))),
+              ),
+            ]),
+            SizedBox(height: 24),
+            Container(
+              width: 339,
+              height: 52,
+              padding: EdgeInsets.symmetric(horizontal: 58, vertical: 15),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Color(0xfff6f6f6),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey,
+                    // spreadRadius: 4,
+                    blurRadius: 4,
+                    offset: Offset(2, 2), // changes position of shadow
+                  ),
+                ],
+              ),
+              child: Center(
+                child: Text(
+                  "Đăng nhập với Google",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Color(0XFF625F6E),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 68),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Chưa có tài khoản?",style: TextStyle(fontSize: 16)),
+                SizedBox(width: 2),
+                TextButton(onPressed: (){}, child: Text("Đăng ký ngay", style: TextStyle(color: Color(0xff6B8AE7), fontSize: 16)))
+              ]
+            )
+          ],
         ),
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:untitled1/Register/Signup.dart';
+import 'package:untitled1/ForgotPassword/ResetPassword.dart';
+
 
 class NumericPad extends StatelessWidget {
   final Function(int) onNumberSelected;
@@ -154,10 +155,10 @@ class _VerifyPhoneState extends State<VerifyPhone> {
     return Scaffold(
       body: Container(
           decoration: BoxDecoration(
-            image: DecorationImage(
-                image: Image.asset("assets/images/Background.jpg").image,
-                fit: BoxFit.fill),
-          ),
+          image: DecorationImage(
+              image: Image.asset("assets/images/Backgr.png").image,
+              fit: BoxFit.fill),
+        ),
           child: Center(
             child: Column(
               children: [
@@ -230,7 +231,7 @@ class _VerifyPhoneState extends State<VerifyPhone> {
                   onTap: () {
                     print("Tiếp tục");
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Signup()));
+                        MaterialPageRoute(builder: (context) => ResetPassword()));
                   },
                   child: Container(
                     width: 223,
