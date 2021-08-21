@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'Signup/Signup.dart';
+
+import 'Signin/Login.dart';
+import 'homePage/homePage.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -15,7 +18,12 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      home: Signup(),
+      home: Login(),
+      routes: {
+        Login.id: (context) => Login(),
+        MyHomePage.id: (context) => MyHomePage(),
+        
+      }
     );
   }
 }

@@ -1,11 +1,31 @@
-import 'package:flutter/material.dart';
-import 'package:untitled1/ForgotPassword/ForrgotPassword.dart';
+import 'dart:convert';
 
-class MyHomePage extends StatelessWidget {
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:untitled1/ForgotPassword/ForrgotPassword.dart';
+import 'package:untitled1/Signup/Signup.dart';
+import 'package:http/http.dart' as http;
+import 'package:untitled1/homePage/homePage.dart';
+
+
+
+class Login extends StatefulWidget {
+  static const String id = "Login";
+  
+
+  @override
+  State<Login> createState() => _LoginState();
+  
+}
+
+class _LoginState extends State<Login> {
+  
+  final _globalkey = GlobalKey<FormState>();
+  var email;
+  var password;
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    double contWidth = size.width * 0.90;
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -38,7 +58,7 @@ class MyHomePage extends StatelessWidget {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: Color(0xffF6F6F6)),
-                  child: TextField(
+                  child: TextFormField(
                     decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
                           borderSide:
@@ -46,6 +66,10 @@ class MyHomePage extends StatelessWidget {
                         ),
                         hintText: "Email",
                         hintStyle: TextStyle(color: Colors.grey, fontSize: 16)),
+                        //obscureText: true,
+                        onChanged: (value){
+                          email = value;
+                        }
                   ),
                 ),
                 Container(
@@ -56,12 +80,15 @@ class MyHomePage extends StatelessWidget {
                   child: TextFormField(
                     obscureText: true,
                     decoration: const InputDecoration(
+                        hintText: "Password",
                         enabledBorder: OutlineInputBorder(
                           borderSide:
                               BorderSide(color: Color(0xffe8e8e8), width: 1.0),
                         ),
-                        hintText: "Password",
                         hintStyle: TextStyle(color: Colors.grey, fontSize: 16)),
+                        onChanged: (value){
+                         password = value;
+                        }
                   ),
                 ),
                 GestureDetector(
@@ -82,40 +109,25 @@ class MyHomePage extends StatelessWidget {
                     ),
                   ),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    // Navigator.push(
-                    //   context, MaterialPageRoute(builder: (
-                    //     context) => HomeScreen()));
-                  },
+                Container(
+                  padding: EdgeInsets.all(16.0),
                   child: Container(
-                    width: 223,
-                    height: 52,
-                    margin: const EdgeInsets.only(top: 50, bottom: 35),
-                    padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      color: Color(0xff6B8AE7),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          // spreadRadius: 4,
-                          blurRadius: 4,
-                          offset: Offset(2, 2), // changes position of shadow
-                        ),
-                      ],
-                    ),
-                    child: Center(
-                      child: Text(
-                        "Đăng nhập",
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.white,
-                        ),
-                      ),
+                    height: 50,
+                    width: 400,
+                    child: FlatButton(
+                      color: Colors.blue,
+                      onPressed:  ()  async  {
+                      signin(email,password);
+                      WidgetsFlutterBinding.ensureInitialized();
+                      SharedPreferences prefs = await SharedPreferences.getInstance();
+                      String? token = prefs.getString("token");
+                      if(token != null){
+                        Navigator.pushNamed(context, MyHomePage.id);
+                      }
+                      },
+                    child: Text ("Signin", style: TextStyle(color: Colors.white))),
                     ),
                   ),
-                ),
                 Row(children: <Widget>[
                   Expanded(
                     child: new Container(
@@ -164,9 +176,9 @@ class MyHomePage extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    // Navigator.push(
-                    //   context, MaterialPageRoute(
-                    //     builder: (context) => Forgotpassword()));
+                     Navigator.push(
+                       context, MaterialPageRoute(
+                         builder: (context) => Signup()));
                   },
                   child: Container(
                     // margin: const EdgeInsets.only(top: 20, left: 220),
@@ -185,5 +197,27 @@ class MyHomePage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  signin ( email, password) async{
+    final response = await http.post(
+      Uri.parse('http://ttdl-nodejs-api.herokuapp.com/api/auth/login'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{  
+        'email': email,
+        'password': password
+      }),
+    );
+    print(response.body);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var parse = jsonDecode(response.body);
+    print (parse["token"]);
+    await prefs.setString('token', parse["token"]);
+    //if (response.statusCode == 201) {
+    //} else {
+    //  throw Exception('Failed to create album.');
+    //}
   }
 }

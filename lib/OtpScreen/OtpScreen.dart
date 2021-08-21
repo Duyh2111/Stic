@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:untitled1/Signup/Signup.dart';
+import 'package:untitled1/Signup/Signup.dart';
 
 class NumericPad extends StatelessWidget {
   final Function(int) onNumberSelected;
@@ -230,7 +230,7 @@ class _VerifyPhoneState extends State<VerifyPhone> {
                   onTap: () {
                     print("Tiếp tục");
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Signup()));
+                        MaterialPageRoute(builder: (context) => Container()));
                   },
                   child: Container(
                     width: 223,
