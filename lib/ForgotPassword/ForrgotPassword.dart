@@ -82,9 +82,7 @@ class ForgotPassword extends StatelessWidget {
                       child: FlatButton(
                         onPressed: () {
                           if (formkey.currentState!.validate()) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Processing Data')),
-                            );
+                        
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (_) => VerifyPhone(phoneNumber: '',)));
                           } else {

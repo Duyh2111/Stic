@@ -33,6 +33,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   form_field_validator: ^1.1.0
   integration_test: ^1.0.2+3
+  flutter_icons: ^1.1.0
+  path: ^1.8.0
+  animated_theme_switcher: ^2.0.1-nullsafety.0
 
 dev_dependencies:
   flutter_test:
@@ -68,8 +71,12 @@ flutter:
   fonts:
     - family: Montserrat
       fonts:
+        - asset: fonts/Montserrat-Medium.ttf
         - asset: fonts/Montserrat-Black.ttf
-
+        - asset: fonts/Montserrat-BlackItalic.ttf
+        - asset: fonts/Montserrat-Bold.ttf
+        - asset: fonts/Montserrat-BoldItalic.ttf
+        - asset: fonts/Montserrat-ExtraBold.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

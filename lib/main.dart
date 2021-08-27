@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'Register/Signup.dart';
-import 'homePage/homePage.dart';
 import 'homePage/hpage.dart';
 import 'Signin/Login.dart';
+import './userProfile/userFrofile.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,10 +16,11 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         fontFamily: 'Montserrat',
-        primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
       home: MyHomePage(),
+
     );
   }
 }
+

@@ -1,41 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import 'hpage.dart';
+import 'ListCompany.dart';
 
-class AddUserScreen extends StatefulWidget {
+class AddCompany extends StatefulWidget {
   @override
-  _AddUserScreen createState() => _AddUserScreen();
+  _AddCompany createState() => _AddCompany();
 }
 
-class _AddUserScreen extends State<AddUserScreen> {
+class _AddCompany extends State<AddCompany> {
+  final quan = ['Quận/ Huyện', 'Sơn Trà', 'Liên Chiểu', 'Cẩm Lệ', 'Ngũ Hành Sơn', 'Thanh Khê','Hải Châu', 'Hoà Vang'];
+  String _quan = 'Quận/ Huyện';
 
-  final congty = ['Công ty', 'Cty 75', 'Cty 76'];
-  String _congty = 'Công ty';
+  final thanhpho = ['Quận/ Huyện', 'Sơn Trà', 'Liên Chiểu', 'Cẩm Lệ', 'Ngũ Hành Sơn', 'Thanh Khê','Hải Châu', 'Hoà Vang'];
+  String _thanhpho = 'Quận/ Huyện';
+
   bool _checkboxListTile = false;
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
-  String? validatePassword(String value) {
-    if (value.isEmpty) {
-      return "* Required";
-    } else if (value.length < 6) {
-      return "Password should be atleast 6 characters";
-    } else if (value.length > 15) {
-      return "Password should not be greater than 15 characters";
-    } else
-      return null;
-  }
-
-  Future<String?> validatorPhone(String value2) async {
-    if (value2.isEmpty) {
-      return 'Mobile can\'t be empty';
-    } else if (value2.isNotEmpty) {
-      //bool mobileValid = RegExp(r"^(?:\+88||01)?(?:\d{10}|\d{13})$").hasMatch(value);
-
-      bool mobileValid =
-          RegExp(r'^(?:\+?88|0088)?01[13-9]\d{8}$').hasMatch(value2);
-      return mobileValid ? null : "Invalid mobile";
-    }
-  }
-
+  
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +35,7 @@ class _AddUserScreen extends State<AddUserScreen> {
                 backgroundColor: Colors.transparent,
                 elevation: 0.0,
                 title: Text(
-                  "Quên mật khẩu",
+                  "Thêm mới đơn vị",
                   style: TextStyle(
                     color: Color(0xFF0f45e7),
                     fontSize: 18,
@@ -79,15 +60,15 @@ class _AddUserScreen extends State<AddUserScreen> {
                                     color: Color(0xC3E8E8E8), width: 1.0),
                               ),
                               filled: true,
-                              hintText: "Tên người dùng",
+                              hintText: "Tên đơn vị",
                               fillColor: Color(0xffF6F6F6),
                               hintStyle:
                                   TextStyle(color: Colors.grey, fontSize: 16)),
                           validator: MultiValidator([
-                            RequiredValidator(errorText: "* Vui lòng nhập tên của bạn"),
-                            
+                            RequiredValidator(
+                                errorText: "* Vui lòng nhập tên đơn vị"),
                           ])),
-                          SizedBox(height: 15),
+                      SizedBox(height: 15),
                       TextFormField(
                           decoration: InputDecoration(
                               isDense: true,
@@ -99,13 +80,13 @@ class _AddUserScreen extends State<AddUserScreen> {
                                     color: Color(0xffe8e8e8), width: 1.0),
                               ),
                               filled: true,
-                              hintText: "Email",
+                              hintText: "Phòng ban",
                               fillColor: Color(0xffF6F6F6),
                               hintStyle:
                                   TextStyle(color: Colors.grey, fontSize: 16)),
                           validator: MultiValidator([
-                            RequiredValidator(errorText: "* Vui lòng điền email của bạn"),
-                            EmailValidator(errorText: "Enter valid email id"),
+                            RequiredValidator(
+                                errorText: "* Vui lòng điền phòng ban"),
                           ])),
                       SizedBox(height: 15),
                       TextFormField(
@@ -121,58 +102,15 @@ class _AddUserScreen extends State<AddUserScreen> {
                                     color: Color(0xffe8e8e8), width: 1.0),
                               ),
                               filled: true,
-                              hintText: "Password",
+                              hintText: "Địa chỉ",
                               fillColor: Color(0xffF6F6F6),
                               hintStyle:
                                   TextStyle(color: Colors.grey, fontSize: 16)),
                           validator: MultiValidator([
-                            RequiredValidator(errorText: "* Vui lòng điền password của bạn"),
-                            MinLengthValidator(6,
-                                errorText:
-                                    "Password should be atleast 6 characters"),
-                            MaxLengthValidator(15,
-                                errorText:
-                                    "Password should not be greater than 15 characters")
+                            RequiredValidator(errorText:"Vui lòng điền địa chỉ")
                           ])),
                       SizedBox(height: 15),
-                      TextFormField(
-                          decoration: InputDecoration(
-                              isDense: true,
-                              contentPadding:
-                                  EdgeInsets.fromLTRB(12, 20, 20, 20),
-                              enabledBorder: new OutlineInputBorder(
-                                borderRadius: new BorderRadius.circular(8.0),
-                                borderSide: BorderSide(
-                                    color: Color(0xffe8e8e8), width: 1.0),
-                              ),
-                              filled: true,
-                              hintText: "Số điện thoại",
-                              fillColor: Color(0xffF6F6F6),
-                              hintStyle:
-                                  TextStyle(color: Colors.grey, fontSize: 16)),
-                          validator: MultiValidator([
-                            RequiredValidator(errorText: "* Vui lòng nhập số điện thoại của bạn"),
-                          ])),
-                      SizedBox(height: 15),
-                      TextFormField(
-                          decoration: InputDecoration(
-                              isDense: true,
-                              contentPadding:
-                                  EdgeInsets.fromLTRB(12, 15, 20, 15),
-                              enabledBorder: new OutlineInputBorder(
-                                borderRadius: new BorderRadius.circular(8.0),
-                                borderSide: BorderSide(
-                                    color: Color(0xffe8e8e8), width: 1.0),
-                              ),
-                              filled: true,
-                              hintText: "Đơn vị công tác",
-                              fillColor: Color(0xffF6F6F6),
-                              hintStyle:
-                                  TextStyle(color: Colors.grey, fontSize: 16)),
-                          validator: MultiValidator([
-                            RequiredValidator(errorText: "* Vui lòng điền nơi bạn đang công tác"),
-                          ])),
-                      SizedBox(height: 15),
+                      
                       Container(
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(7.0),
@@ -185,20 +123,50 @@ class _AddUserScreen extends State<AddUserScreen> {
                                   EdgeInsets.fromLTRB(12, 15, 20, 15),
                               enabledBorder: InputBorder.none,
                             ),
-                            value: _congty,
+                            value: _quan,
                             style: TextStyle(color: Colors.black, fontSize: 16),
                             iconEnabledColor: Colors.black,
-                            items: congty.map((congty) {
+                            items: quan.map((quan) {
                               return DropdownMenuItem(
-                                value: congty,
-                                child: Text('$congty'),
+                                value: quan,
+                                child: Text('$quan'),
                               );
                             }).toList(),
-                            onChanged: (val) => setState(() => _congty = val!),
-                            validator: (congty) => congty == null ? 'Chọn công ty' : null,
+                            onChanged: (val) => setState(() => _quan = val!),
+                            validator: (quan) =>
+                                quan == null ? 'Chọn công ty' : null,
                           ),
                         ),
                       ),
+                      
+                      SizedBox(height: 15),
+                      // Container(
+                      //   decoration: BoxDecoration(
+                      //       borderRadius: BorderRadius.circular(7.0),
+                      //       border: Border.all(color: Color(0xffe8e8e8))),
+                      //   child: Padding(
+                      //     padding: const EdgeInsets.only(left: 0.0),
+                      //     child: DropdownButtonFormField<String>(
+                      //       decoration: InputDecoration(
+                      //         contentPadding:
+                      //             EdgeInsets.fromLTRB(12, 15, 20, 15),
+                      //         enabledBorder: InputBorder.none,
+                      //       ),
+                      //       value: _thanhpho,
+                      //       style: TextStyle(color: Colors.black, fontSize: 16),
+                      //       iconEnabledColor: Colors.black,
+                      //       items: thanhpho.map((quan) {
+                      //         return DropdownMenuItem(
+                      //           value: _thanhpho,
+                      //           child: Text('$thanhpho'),
+                      //         );
+                      //       }).toList(),
+                      //       onChanged: (val) => setState(() => _thanhpho = val!),
+                      //       validator: (thanhpho) =>
+                      //           thanhpho == null ? 'Chọn thành phố' : null,
+                      //     ),
+                      //   ),
+                      // ),
                       SizedBox(height: 25),
                       Theme(
                         data: ThemeData(unselectedWidgetColor: Colors.grey),
@@ -240,7 +208,7 @@ class _AddUserScreen extends State<AddUserScreen> {
                   onPressed: () {
                     if (formkey.currentState!.validate()) {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (_) => ListUsers()));
+                          MaterialPageRoute(builder: (_) => ListCompany()));
                     } else {
                       print("Not Validated");
                     }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:untitled1/ForgotPassword/ForrgotPassword.dart';
+import 'package:untitled1/homePage/Navigation.dart';
 
 class MyHomePage extends StatelessWidget {
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
@@ -28,21 +29,6 @@ class MyHomePage extends StatelessWidget {
         ),
         child: Column(
           children: [
-            // AppBar(
-            //   leading: IconButton(
-            //     icon: Icon(Icons.arrow_back, color: Colors.black),
-            //     onPressed: () => Navigator.of(context).pop(),
-            //   ),
-            //   backgroundColor: Colors.transparent,
-            //   elevation: 0.0,
-            //   title: Text(
-            //     "Đăng nhập",
-            //     style: TextStyle(
-            //       color: Color(0xFF0f45e7),
-            //       fontSize: 18,
-            //     ),
-            //   ),
-            // ),
             Container(
               margin: EdgeInsets.only(top: 170),
               child: Text(
@@ -68,8 +54,8 @@ class MyHomePage extends StatelessWidget {
                       child: TextFormField(
                           decoration: InputDecoration(
                               enabledBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(color: Color(0xffE8E8E8), width: 1.0),
-
+                                borderSide: const BorderSide(
+                                    color: Color(0xffE8E8E8), width: 1.0),
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               border: const OutlineInputBorder(),
@@ -91,8 +77,8 @@ class MyHomePage extends StatelessWidget {
                           obscureText: true,
                           decoration: InputDecoration(
                               enabledBorder: OutlineInputBorder(
-                                      borderSide: const BorderSide(color: Color(0xffE8E8E8), width: 1.0),
-
+                                borderSide: const BorderSide(
+                                    color: Color(0xffE8E8E8), width: 1.0),
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               border: const OutlineInputBorder(),
@@ -111,7 +97,7 @@ class MyHomePage extends StatelessWidget {
                           ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(left: 188),
+                      margin: EdgeInsets.only(left: 170),
                       child: FlatButton(
                         onPressed: () {
                           Navigator.push(
@@ -121,7 +107,8 @@ class MyHomePage extends StatelessWidget {
                         },
                         child: Text(
                           'Quên mật khẩu?',
-                          style: TextStyle(color: Color(0xff625F6E), fontSize: 16),
+                          style:
+                              TextStyle(color: Color(0xff625F6E), fontSize: 16),
                         ),
                       ),
                     ),
@@ -129,21 +116,22 @@ class MyHomePage extends StatelessWidget {
                     Container(
                       height: 52,
                       width: 223,
-                      padding: EdgeInsets.symmetric(horizontal: 32, vertical: 14),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                          width: 2.0, color: const Color(0xFF5479e7)),
-                      borderRadius: BorderRadius.circular(50),
-                      color: Color(0xff6B8AE7),
-                    ),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 32, vertical: 14),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                            width: 2.0, color: const Color(0xFF5479e7)),
+                        borderRadius: BorderRadius.circular(50),
+                        color: Color(0xff6B8AE7),
+                      ),
                       child: FlatButton(
                         onPressed: () {
                           if (formkey.currentState!.validate()) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(content: Text('Processing Data')),
                             );
-                            // Navigator.push(context,
-                            //     MaterialPageRoute(builder: (_) => HomePage()));
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (_) => MainScreen()));
                           } else {
                             print("Not Validated");
                           }
@@ -206,14 +194,14 @@ class MyHomePage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 68),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text("Chưa có tài khoản?",style: TextStyle(fontSize: 16)),
-                SizedBox(width: 2),
-                TextButton(onPressed: (){}, child: Text("Đăng ký ngay", style: TextStyle(color: Color(0xff6B8AE7), fontSize: 16)))
-              ]
-            )
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Text("Chưa có tài khoản?", style: TextStyle(fontSize: 16)),
+              SizedBox(width: 2),
+              TextButton(
+                  onPressed: () {},
+                  child: Text("Đăng ký ngay",
+                      style: TextStyle(color: Color(0xff6B8AE7), fontSize: 16)))
+            ])
           ],
         ),
       ),

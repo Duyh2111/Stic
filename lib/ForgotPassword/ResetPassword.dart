@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:untitled1/OtpScreen/OtpScreen.dart';
+import '../Signin/Login.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 
-
 class ResetPassword extends StatelessWidget {
-    GlobalKey<FormState> formkey = GlobalKey<FormState>();
+  GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -129,15 +128,8 @@ class ResetPassword extends StatelessWidget {
                   ),
                   child: FlatButton(
                     onPressed: () {
-                      if (formkey.currentState!.validate()) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Processing Data')),
-                        );
-                        // Navigator.push(context,
-                        //     MaterialPageRoute(builder: (_) => HomePage()));
-                      } else {
-                        print("Not Validated");
-                      }
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (_) => MyHomePage()));
                     },
                     child: Text(
                       'Tiếp theo',
@@ -145,7 +137,6 @@ class ResetPassword extends StatelessWidget {
                     ),
                   ),
                 ),
-                
               ],
             ),
           ),
