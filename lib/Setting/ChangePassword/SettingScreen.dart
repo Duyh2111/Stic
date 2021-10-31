@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:untitled1/tramquantrac/danhsachquantrac.dart';
-import '../userProfile/userFrofile.dart';
-import '../Setting/ChangePassword/ChangePassword.dart';
-import '../Companys/ListCompany.dart';
+import '../../userProfile/userFrofile.dart';
+import 'ChangePassword.dart';
 
 class Setting extends StatefulWidget {
   const Setting({Key? key}) : super(key: key);
@@ -34,9 +32,9 @@ class _SettingState extends State<Setting> {
                   RaisedButton(
                     onPressed: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ProfilePage()));
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ProfilePage()));
                     },
                     color: Colors.white,
                     shape: RoundedRectangleBorder(
@@ -45,62 +43,9 @@ class _SettingState extends State<Setting> {
                     child: Row(
                       // Replace with a Row for horizontal icon + text
                       children: <Widget>[
-                        Icon(Icons.supervised_user_circle_sharp,
-                            color: Color(0xff6B8AE7)),
+                        Icon(Icons.supervised_user_circle_sharp, color: Color(0xff6B8AE7)),
                         SizedBox(width: 8),
-                        Text("Trang cá nhân",
-                            style: TextStyle(
-                                fontSize: 16, color: Colors.grey[800]))
-                      ],
-                    ),
-                    padding: EdgeInsets.fromLTRB(10, 17, 10, 17),
-                    splashColor: Color(0xff625F6E),
-                  ),
-                  SizedBox(height: 20),
-                  RaisedButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ListCompany()));
-                    },
-                    color: Colors.white,
-                    shape: RoundedRectangleBorder(
-                        side: BorderSide(color: Colors.grey.shade400),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Row(
-                      // Replace with a Row for horizontal icon + text
-                      children: <Widget>[
-                        Icon(Icons.house, color: Color(0xff6B8AE7)),
-                        SizedBox(width: 8),
-                        Text("Cơ quan, đơn vị",
-                            style: TextStyle(
-                                fontSize: 16, color: Colors.grey[800]))
-                      ],
-                    ),
-                    padding: EdgeInsets.fromLTRB(10, 17, 10, 17),
-                    splashColor: Color(0xff625F6E),
-                  ),
-                  SizedBox(height: 20),
-                  RaisedButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Danhsachquantrac()));
-                    },
-                    color: Colors.white,
-                    shape: RoundedRectangleBorder(
-                        side: BorderSide(color: Colors.grey.shade400),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Row(
-                      // Replace with a Row for horizontal icon + text
-                      children: <Widget>[
-                        Icon(Icons.ev_station, color: Color(0xff6B8AE7)),
-                        SizedBox(width: 8),
-                        Text("Trạm quan trắc",
-                            style: TextStyle(
-                                fontSize: 16, color: Colors.grey[800]))
+                        Text("Trang cá nhân", style: TextStyle(fontSize: 16, color: Colors.grey[800]))
                       ],
                     ),
                     padding: EdgeInsets.fromLTRB(10, 17, 10, 17),
@@ -134,12 +79,35 @@ class _SettingState extends State<Setting> {
                   ),
                   SizedBox(height: 20),
                   RaisedButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ChangePassword()));
-                    },
+                    onPressed: () {},
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        side: BorderSide(color: Colors.grey.shade400),
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Text("Click This",
+                        style:
+                            TextStyle(color: Color(0xff625F6E), fontSize: 16)),
+                    padding: EdgeInsets.fromLTRB(10, 17, 10, 17),
+                    splashColor: Color(0xff625F6E),
+                  ),
+                  SizedBox(height: 20),
+                  RaisedButton(
+                    onPressed: () {},
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        side: BorderSide(color: Colors.grey.shade400),
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Text("Click This",
+                        style:
+                            TextStyle(color: Color(0xff625F6E), fontSize: 16)),
+                    padding: EdgeInsets.fromLTRB(10, 17, 10, 17),
+                    splashColor: Color(0xff625F6E),
+                  ),
+                  SizedBox(height: 20),
+                  RaisedButton(
+                    onPressed: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => ChangePassword()));
+                        },
                     color: Colors.white,
                     shape: RoundedRectangleBorder(
                         side: BorderSide(color: Colors.grey.shade400),
